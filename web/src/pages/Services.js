@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import LoadingSpinner from '../components/LoadingSpinner';
-import API_URL from '../config/api';
 
 function Services() {
   const [services, setServices] = useState([]);
@@ -11,7 +10,7 @@ function Services() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${API_URL}/api/services`)
+    fetch('http://localhost:5000/api/services')
       .then(res => res.json())
       .then(data => {
         setServices(data.services || []);

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import API_URL from '../config/api';
 
 function Login({ setAuth }) {
   const [email, setEmail] = useState('');
@@ -41,7 +40,7 @@ function Login({ setAuth }) {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch(`${API_URL}/api/auth/login`, {
+      const res = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -101,7 +100,7 @@ function Login({ setAuth }) {
       <div style={{ marginTop: 16 }}>
         <p>Ou</p>
         <div style={{ display: 'flex', gap: 8 }}>
-          <a href={`${API_URL}/api/auth/google`} style={{ padding: '8px 12px', background: '#4285F4', color: 'white', borderRadius: 6, textDecoration: 'none' }}>Se connecter avec Google</a>
+          <a href="http://localhost:5000/api/auth/google" style={{ padding: '8px 12px', background: '#4285F4', color: 'white', borderRadius: 6, textDecoration: 'none' }}>Se connecter avec Google</a>
           <a href="/register" style={{ padding: '8px 12px', background: '#6c757d', color: 'white', borderRadius: 6, textDecoration: 'none' }}>Créer un compte</a>
         </div>
       </div>

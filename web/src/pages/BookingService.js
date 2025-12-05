@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import API_URL from '../config/api';
 
 function BookingService() {
   const { serviceId } = useParams();
@@ -21,7 +20,7 @@ function BookingService() {
 
   useEffect(() => {
     // Fetch service details
-    fetch(`${API_URL}/api/services/${serviceId}`)
+    fetch(`http://localhost:5000/api/services/${serviceId}`)
       .then(res => res.json())
       .then(data => setService(data))
       .catch(() => setError('Service not found'));
@@ -45,7 +44,7 @@ function BookingService() {
     }
 
     try {
-      const response = await fetch(`${API_URL}/api/services/booking`, {
+      const response = await fetch('http://localhost:5000/api/services/booking', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

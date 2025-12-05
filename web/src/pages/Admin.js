@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import API_URL from '../config/api';
 
 function Admin() {
   const [stats, setStats] = useState({ totalUsers: 0, totalOrders: 0, totalBookings: 0, revenue: 0 });
@@ -25,7 +24,7 @@ function Admin() {
       setIsAdmin(true);
       
       // Charger les stats avec le token admin
-      fetch(`${API_URL}/api/admin/stats`, {
+      fetch('http://localhost:5000/api/admin/stats', {
         headers: {
           'Authorization': `Bearer ${token}`
         }

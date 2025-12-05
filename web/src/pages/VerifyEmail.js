@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import API_URL from '../config/api';
 
 function VerifyEmail() {
   const [searchParams] = useSearchParams();
@@ -18,7 +17,7 @@ function VerifyEmail() {
     }
 
     // Call backend to verify email
-    fetch(`${API_URL}/api/auth/verify-email/${token}`)
+    fetch(`http://localhost:5000/api/auth/verify-email/${token}`)
       .then(res => res.json())
       .then(data => {
         if (data.success) {

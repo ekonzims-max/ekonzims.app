@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import API_URL from '../config/api';
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -23,7 +22,7 @@ function Register() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(val)) return setEmailError('Email invalide');
     try {
-      const res = await fetch(`${API_URL}/api/auth/check-email?email=${encodeURIComponent(val)}`);
+      const res = await fetch(`http://localhost:5000/api/auth/check-email?email=${encodeURIComponent(val)}`);
       const data = await res.json();
       if (data.exists) setEmailError('Email déjà utilisé'); else setEmailError('');
     } catch (e) {
@@ -36,7 +35,7 @@ function Register() {
     if (!termsAccepted || !privacyAccepted) return alert('Vous devez accepter les conditions et la politique');
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/auth/register`, {
+      const res = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, firstName, lastName, phone, street, city, postalCode, termsAccepted, privacyAccepted }),
