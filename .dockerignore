@@ -1,0 +1,35 @@
+# Dépendances
+node_modules
+npm-debug.log
+
+# Build
+web/build
+backend/dist
+
+# Environnement
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Système
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Tests
+coverage
+.nyc_output
+
+# Mobile
+mobile/node_modules
+mobile/.expo
+mobile/.expo-shared

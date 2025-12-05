@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const path = require('path');
 require('dotenv').config();
 
 // Initialize Firebase configuration (must be before importing models)
@@ -22,10 +23,7 @@ const EmailScheduler = require('./services/emailScheduler');
 
 // Middleware de sécurité
 app.use(helmet());
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -34,11 +32,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'ekonzims_secret',
   resave: false,
   saveUninitialized: false,
-  cookie: { 
-    secure: process.env.NODE_ENV === 'production',
-    httpOnly: true,
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
-  }
+  cookie: { secure: false }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -55,6 +49,17 @@ app.use('/api/auth', oauthRoutes);
 app.use('/api/products', productsRoutes);
 app.use('/api/services', servicesRoutes);
 app.use('/api/admin', adminRoutes);
+
+// Servir le frontend en production
+if (process.env.NODE_ENV === 'production') {
+  // Servir les fichiers statiques du build React
+  app.use(express.static(path.join(__dirname, '../../public')));
+  
+  // Pour toutes les routes non-API, servir index.html
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../public/index.html'));
+  });
+}
 
 // Gestion des erreurs
 app.use((err, req, res, next) => {
