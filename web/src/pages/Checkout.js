@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
+import API_URL from '../config/api';
 
 function Checkout() {
   const { cart, getTotal, clearCart } = useContext(CartContext);

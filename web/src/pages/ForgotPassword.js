@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_URL from '../config/api';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
