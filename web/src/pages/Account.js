@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_URL from '../config/api';
 
 function Account() {
   const [user, setUser] = useState(null);
@@ -18,7 +19,7 @@ function Account() {
     setUser(JSON.parse(userData));
 
     // Charger les réservations
-    fetch('http://localhost:5000/api/services/user/bookings', {
+    fetch(`${API_URL}/api/services/user/bookings`, {
       headers: { 'Authorization': `Bearer ${token}` },
     })
       .then(res => res.json())

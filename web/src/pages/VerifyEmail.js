@@ -17,7 +17,7 @@ function VerifyEmail() {
     }
 
     // Call backend to verify email
-    fetch(`http://localhost:5000/api/auth/verify-email/${token}`)
+    fetch(`${API_URL}/api/auth/verify-email/${token}`)
       .then(res => res.json())
       .then(data => {
         if (data.success) {

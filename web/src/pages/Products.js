@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import SearchBar from '../components/SearchBar';
 import LoadingSpinner from '../components/LoadingSpinner';
+import API_URL from '../config/api';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -10,7 +11,7 @@ function Products() {
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/products')
+    fetch(`${API_URL}/api/products`)
       .then(res => res.json())
       .then(data => {
         setProducts(data.products || []);
